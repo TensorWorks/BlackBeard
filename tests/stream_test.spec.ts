@@ -30,7 +30,7 @@ async function waitForVideo(page: Page) {
 test('Test default stream.', async ({ page }, testinfo) => {
 
     // set a long timeout for slow resource spin up
-    test.setTimeout(2 * 60 * 1000);
+    test.setTimeout(6 * 60 * 1000);
 
     await page.goto("");
 	await page.locator("#connectButton").click();
