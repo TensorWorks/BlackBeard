@@ -1,13 +1,7 @@
 # BlackBeard
 
-Is a automated chromium that serves a local webpage that connect to the SPS websocket, starts the stream, and waits for a frame.
+Tests SPS demo streams are able to actually stream using Github actions.
 
-## Structure
+The actions can be triggered manually if you so wish, otherwise they are triggered on a CRON timer every 8 hours.
 
-`/Puppeteer` - The automated chromium using NodeJS
-
-`/Client` - The local webpage that use Pixel Streaming frontend library to connect to SPS
-
-`/Results` - The directory where the screenshot is saved
-
-`/UE/Blackbeard` - The most minimal Pixel Streaming project possible (not currently used)
+If the action fails, a message is sent to the TensorWorks Discord channel to let us know the demos are down.
