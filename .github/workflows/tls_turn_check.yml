@@ -1,0 +1,49 @@
+name: Test SPS Demos with restricted networking (TCP + 443)
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  test-cw-demo-tls-turn:
+    env:
+      PIXELSTREAMING_URL: '${{ secrets.CW_DEMO_URL }}'
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Restrict network traffic to tcp + 443
+      run: |
+        sudo iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
+        sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+        sudo iptables -P OUTPUT DROP
+        sudo iptables -P INPUT DROP
+    
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    - name: Setup node
+      uses: actions/setup-node@v4
+
+    - name: Setup playwright
+      run: |
+        npm install
+        npx playwright install --with-deps
+        npx playwright install chrome
+
+    - name: Test if we can stream
+      id: playwright
+      run: npx playwright test
+
+    # - name: Post Discord message
+    #   if: failure()
+    #   run: |
+    #     curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"@here Could not stream ${{ secrets.CW_DEMO_URL }} \"}" ${{ secrets.DISCORD_WEBHOOK }}
+
+    - name: Get short sha
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: Results-${{ steps.vars.outputs.sha_short }}-cw
+        path: playwright-report
