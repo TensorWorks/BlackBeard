@@ -21,7 +21,7 @@ jobs:
     - name: Setup playwright
       run: |
         npm install
-        npx playwright install --with-deps --no-shell
+        npx playwright install --with-deps
 
     - name: Test if we can stream
       id: playwright
@@ -57,7 +57,7 @@ jobs:
     - name: Setup playwright
       run: |
         npm install
-        npx playwright install --with-deps --no-shell
+        npx playwright install --with-deps
 
     - name: Test if we can stream
       id: playwright

@@ -10,7 +10,7 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"postinstall": "npx playwright install --with-deps --no-shell",
+	"postinstall": "npx playwright install --with-deps",
 	"devDependencies": {
 		"@playwright/test": "^1.49.0",
 		"@types/node": "^20.12.7",
