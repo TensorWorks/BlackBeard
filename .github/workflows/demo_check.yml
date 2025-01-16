@@ -21,8 +21,7 @@ jobs:
     - name: Setup playwright
       run: |
         npm install
-        npx playwright install --with-deps
-        npx playwright install chrome
+        npx playwright install --with-deps --no-shell
 
     - name: Test if we can stream
       id: playwright
@@ -58,8 +57,7 @@ jobs:
     - name: Setup playwright
       run: |
         npm install
-        npx playwright install --with-deps
-        npx playwright install chrome
+        npx playwright install --with-deps --no-shell
 
     - name: Test if we can stream
       id: playwright
@@ -68,7 +66,7 @@ jobs:
     - name: Post Discord message
       if: failure()
       run: |
-        curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"@here Could not stream ${{ secrets.AWS_DEMO_URL }} \"}" ${{ secrets.DISCORD_WEBHOOK }}
+        curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"@SPSTeam Could not stream ${{ secrets.AWS_DEMO_URL }} \"}" ${{ secrets.DISCORD_WEBHOOK }}
 
     - name: Get short sha
       id: vars

@@ -26,13 +26,17 @@ async function waitForVideo(page: Page) {
     });
 }
 
+test.beforeEach(async ({ page }) => {
+    // Runs before each test and signs in each page.
+    await page.goto(process.env.PIXELSTREAMING_URL || 'https://sps.tenant-tensorworks-demo.lga1.ingress.coreweave.cloud/carconfigurator/');
+  });
+
 // just quickly test that the default stream is working
 test('Test default stream.', async ({ page }, testinfo) => {
 
     // set a long timeout for slow resource spin up
     test.setTimeout(6 * 60 * 1000);
 
-    await page.goto("");
 	await page.locator("#connectButton").click();
 
     // wait until we get a stream
