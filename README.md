@@ -1,6 +1,6 @@
 # BlackBeard
 
-Tests SPS demo streams are able to actually stream using Github actions.
+Tests SPS demo streams are able to actually stream using Github actions and Playwright.
 
 The actions can be triggered manually if you so wish, otherwise they are triggered on a CRON timer every 8 hours.
 
